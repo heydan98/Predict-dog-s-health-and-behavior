@@ -1,0 +1,259 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+:root {
+  --background-color: rgb(6, 250, 107);
+  --acid-height: 0;
+  --display-charging: "none";
+}
+
+.battery {
+  position: relative;
+  margin-left: 5.5rem;
+  margin-top: -0.8rem;
+  width: 150px;
+  height: 250px;
+  border: 4px solid #07ec29;
+  border-radius: 25px;
+}
+
+.battery:after {
+  position: absolute;
+  top: -18px;
+  left: 45px;
+  width: 40px;
+  height: 10px;
+  background-color: #10f062;
+  border-radius: 5px 5px 0px 0px;
+  content: "";
+}
+
+.acid-container {
+  overflow: hidden;
+  height: calc(100% - 8px);
+  border-radius: 18px;
+  margin: 4px;
+  position: relative;
+}
+
+.acid-container .acid {
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  flex-flow: column-reverse;
+}
+
+.acid-container .acid .fill {
+  background: rgb(3, 245, 51);
+  height: var(--acid-height);
+  width: 100%;
+  flex-shrink: 0;
+  transition: height 2s ease-in-out;
+}
+
+.acid-container .acid .waves {
+  display: block;
+  width: 100%;
+  height: 28px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translateY(calc(100% - var(--acid-height)));
+  transition: transform 0.3s ease-in-out;
+}
+
+.acid-container .acid .waves .parallax > use {
+  animation: move-forever 12s linear infinite;
+}
+
+.acid-container .acid .waves .parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  fill: rgba(255, 255, 255, 0.6);
+}
+
+.acid-container .acid .waves .parallax > use:nth-child(2) {
+  animation-delay: -2s;
+  animation-duration: 5s;
+  fill: rgba(255, 255, 255, 0.8);
+}
+
+.acid-container .acid .waves .parallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 3s;
+  fill: white;
+}
+
+@keyframes move-forever {
+  0% {
+    transform: translate(-90px, 0%) translateY(-10%);
+  }
+  100% {
+    transform: translate(85px, 0%) translateY(10%);
+  }
+}
+
+.percentage {
+  font-size: 120%;
+  font-weight: bold;
+  color: rgb(11, 252, 155);
+  margin-left: 3.5rem;
+  margin-top: 15px;
+}
+
+.percentage i {
+  margin-right: 6px;
+  display: var(--display-charging);
+}
+
+.acid-container .acid .fill.full-low-battery {
+  background: red; /* Đổi màu thành đỏ khi pin dưới 20% */
+}
+
+.battery.low-battery {
+  border-color: red; /* Đổi màu viền sang đỏ khi pin dưới 20% */
+  background-color: #ffcdd2; /* Đổi màu nền cục pin sang hồng nhạt */
+}
+
+.battery.low-battery:after {
+  background-color: red; /* Đổi màu phần viền trên cùng sang đỏ */
+}
+
+.battery.low-battery .percentage {
+  color: red; /* Đổi màu chữ hiển thị giá trị pin sang đỏ */
+}
+
+.battery.low-battery .percentage i {
+  color: red; /* Đổi màu icon sang đỏ */
+}
+
+
+/* Alerts Dropdown Styles */
+#alerts-scroll-container {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.dropdown-list {
+  padding: 0;
+  border: none;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.dropdown-header {
+  background-color: #4e73df;
+  border: 1px solid #4e73df;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: #fff;
+}
+
+.dropdown-list .dropdown-item {
+  white-space: normal;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-left: 1px solid #e3e6f0;
+  border-right: 1px solid #e3e6f0;
+  border-bottom: 1px solid #e3e6f0;
+}
+
+.dropdown-list .dropdown-item:first-child {
+  border-top: 1px solid #e3e6f0;
+}
+
+.dropdown-list .dropdown-item:hover {
+  background-color: #f8f9fc;
+}
+
+.icon-circle {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-primary {
+  background-color: #4e73df !important;
+}
+
+.bg-success {
+  background-color: #1cc88a !important;
+}
+
+.bg-warning {
+  background-color: #f6c23e !important;
+}
+
+.bg-danger {
+  background-color: #e74a3b !important;
+}
+
+/* Toast Styles */
+#toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.alert {
+  min-width: 250px;
+  margin-bottom: 10px;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.alert-dismissible .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.75rem 1.25rem;
+  color: inherit;
+}
+
+/* Animation for toasts */
+.alert.fade {
+  transition: opacity 0.15s linear;
+}
+
+.alert.fade:not(.show) {
+  opacity: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  #toast-container {
+      left: 20px;
+      right: 20px;
+  }
+
+  .alert {
+      min-width: auto;
+  }
+}
+
+/* Badge styles */
+.badge-counter {
+  position: absolute;
+  transform: scale(0.7);
+  transform-origin: top right;
+  right: 0.25rem;
+  margin-top: -0.25rem;
+}
+
+/* Nav item styles */
+.nav-item .nav-link {
+  position: relative;
+}
+
+.nav-item .nav-link .badge-counter {
+  position: absolute;
+  transform: scale(0.7);
+  transform-origin: top right;
+  right: 0.25rem;
+  margin-top: -0.25rem;
+}
+
+/* Dropdown toggle arrow */
+.dropdown-toggle::after {
+  display: none;
+}
